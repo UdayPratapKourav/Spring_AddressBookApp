@@ -1,18 +1,27 @@
 package com.bridgelabz.AddressBook.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Table(name = "address_book")
 public class AddressBook {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generate ID
-    private int id;
+    private Long id;
+
+    @Column(nullable = false) // Ensures 'name' is mandatory
     private String name;
+
+    @Column(nullable = false, unique = true) // Ensures unique phone numbers
+    private String phone;
+
+    @Column(nullable = false, unique = true) // Ensures unique emails
     private String email;
 }
